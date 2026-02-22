@@ -1,73 +1,73 @@
-# React + TypeScript + Vite
+# NimbleGravity Fullstack Test
+Technical assessment built with React, TypeScript and Vite.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The application allows a candidate to:
+- View available job positions
+- Apply to a selected job by submitting a repository URL
+- Handle loading, success and error states properly
 
-Currently, two official plugins are available:
+## Tech Stack
+- React 18
+- TypeScript
+- Vite
+- CSS (plain CSS per component)
+- Custom Hooks for data fetching
+- Mock service layer (toggleable)
+- pnpm
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Architecture
+The project follows a modular architecture with clear separation of concerns:
 
-## React Compiler
+- UI Layer → Reusable components grouped by feature (ui/, jobs/)
+- Hooks Layer → Custom hooks encapsulating business logic and async state management
+- Service Layer → Infrastructure layer responsible for API communication
+- Mock Layer → Simulated API responses with delay and error scenarios
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+All services are abstracted behind a single entry point (services/index.ts), allowing easy switching between real API and mock services via environment variables.
 
-## Expanding the ESLint configuration
+## Project Structure
+```
+src/
+ ├── components/              
+ │    ├── ui/
+ │    └── jobs/
+ │
+ ├── hooks/                       
+ │    ├── useApplyToJob.ts
+ │    └── useJobs.ts
+ │
+ ├── services/
+ │    ├── candidateService.mock.ts
+ │    ├── candidateService.ts
+ │    ├── jobService.mock.ts
+ │    ├── jobService.ts
+ │    └── index.ts
+ │
+ ├── types/
+ │
+ ├── mocks/
+ │
+ ├── App.tsx
+ │
+ └── main.tsx
+ ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+ ## Environment Variables
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Create a `.env` file in the root directory:
+```
+VITE_USE_MOCK=true
+```
+true → Uses mock services
+false → Uses real API endpoints
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## How to Run
+Install dependencies
+```
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Run the project
+```
+pnpm run dev
 ```
