@@ -36,9 +36,8 @@ export function JobItem({ job, candidate }: JobItemProps) {
 
   const handleChange = (value: string) => {
     setRepoUrl(value);
-
-    const error = validateRepoUrl(value);
-    setValidationError(error);
+    const err = validateRepoUrl(value);
+    setValidationError(err);
 
     if (status === "success") {
       reset();
@@ -46,10 +45,10 @@ export function JobItem({ job, candidate }: JobItemProps) {
   };
 
   const handleSubmit = async () => {
-    const error = validateRepoUrl(repoUrl);
+    const err = validateRepoUrl(repoUrl);
 
-    if (error) {
-      setValidationError(error);
+    if (err) {
+      setValidationError(err);
       return;
     }
 
@@ -57,7 +56,7 @@ export function JobItem({ job, candidate }: JobItemProps) {
       uuid: candidate.uuid,
       jobId: job.id,
       candidateId: candidate.candidateId,
-      repoUrl: repoUrl,
+      repoUrl,
     });
   };
 
@@ -65,10 +64,10 @@ export function JobItem({ job, candidate }: JobItemProps) {
   const isSuccess = status === "success";
 
   return (
-    <div className="job-item">
-      <h3 className="job-item__title">{job.title}</h3>
+    <div className="job-card">
+      <h3 className="job-title">{job.title}</h3>
 
-      <div className="job-item__controls">
+      <div className="job-form">
         <Input
           value={repoUrl}
           onChange={(e) => handleChange(e.target.value)}
@@ -85,20 +84,16 @@ export function JobItem({ job, candidate }: JobItemProps) {
             repoUrl.trim() === ""
           }
         >
-          {isSubmitting ? <Spinner /> : "Submit"}
+          {isSubmitting ? <Spinner size="small" /> : "Submit"}
         </Button>
       </div>
 
-      {validationError && (
-        <p className="job-item__validation-error">{validationError}</p>
-      )}
+      {validationError && <p className="job-validation">{validationError}</p>}
 
-      {status === "error" && error && (
-        <p className="job-item__submit-error">{error}</p>
-      )}
+      {status === "error" && error && <p className="job-error">{error}</p>}
 
       {isSuccess && (
-        <p className="job-item__success">Application sent successfully!</p>
+        <p className="job-success">Application sent successfully!</p>
       )}
     </div>
   );

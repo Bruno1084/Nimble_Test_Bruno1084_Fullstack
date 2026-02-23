@@ -1,19 +1,23 @@
-.btn {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  border: none;
-  background-color: #1976d2;
+.button {
+  background-color: #2563eb;
   color: white;
+  border: none;
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
   cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.btn:hover:not(:disabled) {
-  background-color: #1565c0;
+.button:hover {
+  background-color: #1e40af;
 }
 
-.btn:disabled {
-  opacity: 0.6;
+.button:active {
+  transform: scale(0.97);
+}
+
+.button:disabled {
+  background-color: #9ca3af;
   cursor: not-allowed;
 }

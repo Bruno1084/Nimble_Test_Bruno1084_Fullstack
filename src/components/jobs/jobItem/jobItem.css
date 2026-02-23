@@ -1,22 +1,35 @@
-.job-item {
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+.job-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.job-item__controls {
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+.job-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.job-form {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
+  align-items: center;
 }
 
-.job-item__validation-error,
-.job-item__submit-error {
-  color: #d32f2f;
-  margin-top: 0.5rem;
+.job-success {
+  color: #16a34a;
+  margin-top: 0.75rem;
+  font-weight: 500;
 }
 
-.job-item__success {
-  color: #2e7d32;
-  margin-top: 0.5rem;
+.job-error {
+  color: #dc2626;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
 }
