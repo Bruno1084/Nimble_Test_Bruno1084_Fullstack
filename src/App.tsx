@@ -1,10 +1,36 @@
 import { useJobs } from "./hooks/useJobs";
+import { useCandidate } from "./hooks/useCandidate";
 import { JobList } from "./components/jobs/jobList/JobList";
 import { Spinner } from "./components/ui/spinner/Spinner";
-import { mockCandidate } from "./mocks/mockData";
+
+const CANDIDATE_EMAIL = "sosabruno3384@gmail.com";
 
 export function App() {
-  const { jobs, status, error } = useJobs();
+  const {
+    candidate,
+    status: candidateStatus,
+    error: candidateError,
+  } = useCandidate(CANDIDATE_EMAIL);
+
+  const { jobs, status: jobsStatus, error: jobsError } = useJobs();
+
+  // Global loading
+  if (candidateStatus === "loading" || jobsStatus === "loading") {
+    return <Spinner />;
+  }
+
+  // Candidate error
+  if (candidateStatus === "error") {
+    return <p>{candidateError}</p>;
+  }
+
+  // Jobs error
+  if (jobsStatus === "error") {
+    return <p>{jobsError}</p>;
+  }
+
+  // Safety guard
+  if (!candidate) return null;
 
   return (
     <div className="app-container">
@@ -14,17 +40,7 @@ export function App() {
       </header>
 
       <main className="app-content">
-        {status === "loading" && <Spinner />}
-
-        {status === "error" && (
-          <div className="app-error">
-            <p>{error}</p>
-          </div>
-        )}
-
-        {status === "success" && (
-          <JobList jobs={jobs} candidate={mockCandidate} />
-        )}
+        <JobList jobs={jobs} candidate={candidate} />
       </main>
     </div>
   );

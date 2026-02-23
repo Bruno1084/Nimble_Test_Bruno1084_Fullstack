@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchJobs } from "../services/jobsService";
+import { fetchJobs } from "../services";
 import type { Job } from "../types/job";
 import type { UseJobsReturn } from "../types/useJobs.type";
 import type { GetStatus } from "../types/status";
@@ -7,7 +7,7 @@ import type { GetStatus } from "../types/status";
 export function useJobs(): UseJobsReturn {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [status, setStatus] = useState<GetStatus>("idle");
-  const [error, setError] = useState(Object);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const abortController = new AbortController();

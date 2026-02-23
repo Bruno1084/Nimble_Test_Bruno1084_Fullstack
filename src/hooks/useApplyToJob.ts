@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { applyToJob } from "../services/candidateService";
+import { applyToJob } from "../services";
 import type { PostStatus } from "../types/status";
 import type { ApplyPayload } from "../types/application";
 import type { UseApplyToJobReturn } from "../types/useApplyToJob.type";
