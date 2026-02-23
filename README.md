@@ -71,3 +71,20 @@ Run the project
 ```
 pnpm run dev
 ```
+## Debugging Notes
+During development, the API returned ```400 Bad Request``` when submitting my application.
+
+The error response was:
+```
+{
+  "error": "Invalid body",
+  "details": {
+    "fieldErrors": {
+      "applicationId": ["applicationId is required"]
+    }
+  }
+}
+```
+Although the instructions specified sending ```uuid```, ```jobId```, ```candidateId```, and ```repoUrl```, the API also required the ```applicationId``` field returned in Step 2.
+
+After inspecting the error response body, I updated the payload to include ```applicationId```, resolving the issue successfully.

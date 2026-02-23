@@ -5,7 +5,7 @@ import { Spinner } from "./components/ui/spinner/Spinner";
 
 const CANDIDATE_EMAIL = "sosabruno3384@gmail.com";
 
-export function App() {
+function App() {
   const {
     candidate,
     status: candidateStatus,
@@ -45,3 +45,5 @@ export function App() {
     </div>
   );
 }
+
+export default App

@@ -52,10 +52,12 @@ export function JobItem({ job, candidate }: JobItemProps) {
       return;
     }
 
+    // This is the catch. The endpoint requires applicationId.
     await apply({
       uuid: candidate.uuid,
       jobId: job.id,
       candidateId: candidate.candidateId,
+      applicationId: candidate.applicationId,
       repoUrl,
     });
   };

@@ -1,4 +1,4 @@
-.button {
+.btn {
   background-color: #2563eb;
   color: white;
   border: none;
@@ -9,15 +9,15 @@
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-.button:hover {
+.btn:hover {
   background-color: #1e40af;
 }
 
-.button:active {
+.btn:active {
   transform: scale(0.97);
 }
 
-.button:disabled {
+.btn:disabled {
   background-color: #9ca3af;
   cursor: not-allowed;
 }

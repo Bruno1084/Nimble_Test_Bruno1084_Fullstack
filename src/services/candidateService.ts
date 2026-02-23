@@ -32,12 +32,11 @@ export async function applyToJob(
       signal,
     }
   );
-
+  // This one gave me trouble. ApplicationId is required
   if (!response.ok) {
-    const errorBody = await response.json().catch(() => null);
-    throw new Error(
-      errorBody?.message || `HTTP error: ${response.status}`
-    );
+    const text = await response.text();
+    console.log("ERROR BODY:", text);
+    throw new Error(`HTTP ${response.status}: ${text}`);
   }
 
   const result = await response.json();
